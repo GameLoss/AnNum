@@ -1,5 +1,8 @@
-xl = 0
-xu = 0
+from prettytable import PrettyTable
+
+myTable = PrettyTable(["i", "xl", "xu", "xr", "Error"])
+xl = 2.9
+xu = 3.1
 xr = 0
 xra = 0
 b = 0
@@ -27,8 +30,6 @@ def ea(xra, xr):
     ea=abs((xr-xra)/xr) * 100
     return ea
 
-xl = float(input("xl="))
-xu = float(input("xu="))
 b = int(input("1.-Metodo Biseccion\n2.-Metodo Posicion Falsa\n"))
 xr = xrr(xl,xu,b)
 
@@ -36,10 +37,11 @@ if (fx(xl)*fx(xu)<0):
     j=0
     k=0
     i=0
-    print("xr0= ", xr)
+    err=0
+    myTable.add_row([i, xl, xu, xr, err])
     a=True
     while(a):
-
+        
         xra = xr
         
         if(fx(xl)*fx(xr)<0):
@@ -56,9 +58,7 @@ if (fx(xl)*fx(xu)<0):
         err=ea(xra, xr)
         if(err<0.5):
             a=False
-        print("xr",i,"= ", xr)
-        print("xl",j,"= ", xl)
-        print("xu",k,"= ", xu)   
-        print("Error Aproximado = ", err)
+        myTable.add_row([i, xl, xu, xr, err])
+    print(myTable)
 else:
     print("La raiz no se encuentra en el intervalo")
